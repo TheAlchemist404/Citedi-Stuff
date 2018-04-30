@@ -9983,9 +9983,9 @@ var mosseFilterResponses = function() {
      * @returns {Object}
      */
 
-     flag = 0;
+     /*flag = 0;
      Xfixations=[0];
-     Yfixations=[0];
+     Yfixations=[0];*/
 
     webgazer.reg.RidgeRegThreaded.prototype.predict = function(eyesObj) {
         /*console.log('LOGGING..');*/
@@ -10005,7 +10005,7 @@ var mosseFilterResponses = function() {
         predictedX = Math.floor(predictedX);
         predictedY = Math.floor(predictedY);
 
-        if(flag!=1)
+        /*if(flag!=1)
  		{
 
  			Xfixations.push(predictedX)
@@ -10014,7 +10014,7 @@ var mosseFilterResponses = function() {
 			//i++;
         
 			//array = [xprediction, yprediction, clock];
- 		}
+ 		}*/
 
 
 

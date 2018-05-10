@@ -1,101 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>GazerTest (WebGazer powered)</title>
-
-	<script src="./js/WebGazer.js" type="text/javascript" ></script>
+    <title>Ultimate</title>
+    <script src="./js/main.js"></script>
+    <script src="./js/WebGazer.js" type="text/javascript" ></script>
 	<script src="./js/precision_store_points.js" type="text/javascript" ></script>
 	<script src="./js/require.js" type="text/javascript" ></script>
-	
-	<script type="text/javascript">
-
-		var logger;
-		var flag=false;
-
-		window.onload = function() {
-    		webgazer.setRegression('threadedRidge') /* currently must set regression and tracker */
-        		.setTracker('clmtrackr')
-        		.begin()
-        		.showPredictionPoints(true);
-        	/*if (typeof(logger) == "undefined") {
-    			logger = new Worker("./js/logger.js");
-    			logger.postMessage(webgazer)
-			}*/
-        };
-    </script>
+    <link rel="stylesheet" href="./css/DisplayCSS.css">
 </head>
-<body>
-
-	<button onclick="saveGazerData()">Record</button>
-
-	<script type="text/javascript">
-
-		flag=false;
-		var contador=0,
-		Xprediction=[],
-		Yprediction=[],
-		TimeStamp=[],
-		Stuff=[[]];
-
-		function logginData(){
-			contador=contador+1;
-			gazerdata=webgazer.getCurrentPrediction();
-			Xprediction.push(gazerdata.x);
-			console.log(gazerdata.x)
-			Yprediction.push(gazerdata.y);
-			TimeStamp.push(contador);
-			var dummy=[0,0,0];
-			Stuff=[[]];
-			for (var i = Xprediction.length - 1; i >= 0; i--) {
-				dummy=[Xprediction[i],Yprediction[i],TimeStamp[i]];
-				Stuff.push(dummy);
-				}
-		}
-
-		
-
-		function saveGazerData(){
-			
-			//save fixaxion data
-			flag = !flag;
-
-			/*logger.onmessage = function(event) {
-            	csvStuff = event.data;
-            	flag= false;
-        	};*/
-
-			/*console.log(csvStuff)*/
-			if (flag){
-				logger=setInterval(logginData,1500);
-			}else{
-				
-				csvStuff=Stuff
-				clearInterval(logger)
-				var csv = 'x fixations,y fixations,timeStamp';
-	    		csvStuff.forEach(function(row) {
-	            	csv += row.join(',');
-	            	csv += "\n";
-	    		});
-
-				var hiddenElement = document.createElement('a');
-				hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-				hiddenElement.target = '_blank';
-				hiddenElement.download = 'myFile.csv';
-				hiddenElement.click();
-
-				contador=0;
-				Xprediction=[];
-				Yprediction=[];
-				TimeStamp=[];
-				csvStuff=[[]];
-				Stuff=[[]];
-			}
-			/*logger.terminate();*/
-
-		}
-
-
-		
-	</script>
+<body onkeyup="choosePic()">
+	<div class="Step" id="test">
+		<div class="instructions" id="testins">Move the mouse sligtly til you have nothing selected, press any key to start.</div>
+		<div class="centerFrames" id="frame1">
+			<img src="images/spacer.jpg" id="Pic1" class="" alt="some image">
+		</div>
+		<div class="centerFrames" id="frame2">
+			<img src="images/spacer.jpg" id="Pic2" class="" alt="some image">
+		</div>
+	</div>
+	<div class="Step" id="Step2">
+		<div class="instructions" id="step2ins">Click the buttons around and follow as you move the mouse</div>
+        <input type="button" class="Calibration" id="Pt1" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt2" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt3" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt4" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt5" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt6" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt7" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt8" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt9" onclick="CButtons(this.id)"></input>
+    </div>
+    <div class="Step" id="Step1">
+    	<canvas id="plotting_canvas" width="500" height="500" style="cursor:crosshair;"></canvas>
+	</div>
 </body>
 </html>

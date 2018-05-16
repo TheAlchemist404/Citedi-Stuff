@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ultimate</title>
+    <script src="./js/main.js"></script>
+    <script src="./js/WebGazer.js" type="text/javascript" ></script>
+	<script src="./js/precision_store_points.js" type="text/javascript" ></script>
+	<script src="./js/require.js" type="text/javascript" ></script>
+    <link rel="stylesheet" href="./css/DisplayCSS.css">
+</head>
+<body onkeyup="choosePic()">
+	<div class="Step" id="test" style="z-index: 1;">
+		<div class="instructions" id="testins" style="z-index: 2;">Move the mouse sligtly til you have nothing selected, press any key to start.</div>
+		<div class="centerFrames" id="frame1">
+			<img src="images/spacer.jpg" id="Pic1" class="" alt="some image">
+		</div>
+		<div class="centerFrames" id="frame2">
+			<img src="images/spacer.jpg" id="Pic2" class="" alt="some image">
+		</div>
+	</div>
+	<div class="Step" id="Step2" style="cursor:crosshair;" style="z-index: 4;">
+		<div class="instructions" id="step2ins" style="z-index: 5;" >Click the buttons around and follow as you move the mouse</div>
+        <input type="button" class="Calibration" id="Pt1" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt2" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt3" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt4" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt5" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt6" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt7" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt8" onclick="CButtons(this.id)"></input>
+        <input type="button" class="Calibration" id="Pt9" onclick="CButtons(this.id)"></input>
+        <canvas id="plotting_canvas" width="500" height="500" style="z-index: 8"></canvas>
+    </div>
+    <!-- <div class="Step" id="Step1" style="z-index: 10" >
+    	<button>wait</button>
+        <button>click</button>
+	</div> -->
+</body>
+</html>

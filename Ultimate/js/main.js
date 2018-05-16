@@ -10,19 +10,60 @@ Yprediction=[],
 CurrentTimeStamp=[],
 TimeStamp=[],
 Stuff=[[]];
-var test=[/*add here the test sequence*/
+var test=[
 [0,1],
-[0,2]
-];//put it empty if you are off debugging stage
+[2,3],
+[4,5],
+[6,7],
+[8,1],
+[9,10],
+[11,12],
+[2,13],
+[14,15],
+[16,17],
+[18,15],
+[19,20],
+[21,22],
+[23,10],
+[24,8],
+[25,22],
+[26,27],
+[26,28]
+];/*add here the test sequence*/
 var myPix = [
-	["images/lion.jpg","lion"],
-	["images/tiger.jpg","tiger"],
-	["images/bear.jpg","bear"]
+	["images/01.png","apple"],
+	["images/02.png","acorn"],
+	["images/03.png","half-lifeBlack-mesa"],
+    ["images/04.png","infinity"],
+    ["images/05.png","ribbon"],
+    ["images/06.png","waves"],
+    ["images/07.png","boat"],
+    ["images/08.png","car"],
+    ["images/09.png","garlic"],
+    ["images/10.png","half-lifeCombine"],
+    ["images/11.png","nirrti"],
+    ["images/12.png","hippo"],
+    ["images/13.png","flamingo"],
+    ["images/14.png","cross"],
+    ["images/15.png","fish"],
+    ["images/16.png","cat"],
+    ["images/17.png","horse"],
+    ["images/18.png","rooster"],
+    ["images/19.png","bat"],
+    ["images/20.png","rocket"],
+    ["images/21.png","planet"],
+    ["images/22.png","onion"],
+    ["images/23.png","carrot"],
+    ["images/24.png","simbol"],
+    ["images/25.png","truck"],
+    ["images/26.png","wheat"],
+    ["images/27.png","shield1"],
+    ["images/28.png","shield2"],
+    ["images/29.png","shield3"]
 	];
 
 function choosePic() {//it will be secuential on all the tests
 	if (document.getElementById('Step2').style.visibility=="hidden"){
-		document.getElementById('testins').style.visibility="hidden"
 		document.getElementById('frame1').style.visibility="initial"
 		document.getElementById('frame2').style.visibility="initial"
 		if(index==test.length){
@@ -40,6 +81,7 @@ function choosePic() {//it will be secuential on all the tests
 			hiddenElement.target = '_blank';
 			hiddenElement.download = 'myFile.csv';
 			hiddenElement.click();
+            document.getElementById('test').style.cursor="default"
 		} else {
 			//new set, be sure to reset the timestamp
 			if(index==0){
@@ -48,6 +90,10 @@ function choosePic() {//it will be secuential on all the tests
 			if(document.getElementById("Pic1").style.visibility!='hidden'){
                 document.getElementById("Pic1").style.visibility='hidden';
                 document.getElementById("Pic2").style.visibility='hidden';
+                document.getElementById("Pic1").src = "images/spacer.png";
+                document.getElementById("Pic1").alt ='none';
+                document.getElementById("Pic2").src = "images/spacer.png";
+                document.getElementById("Pic2").alt = 'none';
                 var toggle= setTimeout(function() {
                     document.getElementById("Pic1").src = myPix[test[index][0]][0];
                     document.getElementById("Pic1").alt = myPix[test[index][0]][1];
@@ -80,8 +126,6 @@ function SetUp(){
     setTimeout(checkIfReady,100);
 
    	document.getElementById('Pt5').style.display="none";
-//set up the list of pictures
-
 }
 
  var width = 320;
@@ -127,7 +171,7 @@ function SetVideoOutput(){
         faceOverlay.style.top = '59px';
         faceOverlay.style.left = '107px';
         faceOverlay.style.border = 'solid';
-        overlay.style.zIndex=6;
+        
 
         document.getElementById('Step2').appendChild(video);
         document.getElementById('Step2').appendChild(overlay);
@@ -188,10 +232,10 @@ console.log(CalibrationPoints[ButtonClicked]);
     document.getElementById(ButtonClicked).style.opacity=opacity;
   }
 	//Show the middle calibration point after all other points have been clicked.
-	if (PointCalibrate == 8){
+	if (PointCalibrate == 16){
 		document.getElementById('Pt5').style.display="initial";
 	}
-	if (PointCalibrate >= 9){ // last point is calibrated
+	if (PointCalibrate >= 17){ // last point is calibrated
 		document.getElementById('Step2').style.visibility="hidden";
 	}
 }

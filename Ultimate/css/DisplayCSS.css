@@ -47,6 +47,38 @@
     bottom:2vh;
     right:2vw;
 }
+#Pt10{
+    top: 25vh;
+    left:25vw;
+}
+#Pt11{
+    top: 25vh;
+    left:50vw;
+}
+#Pt12{
+    top: 25vh;
+    left:75vw;
+}
+#Pt13{
+    top:50vh;
+    left:25vw;
+}
+#Pt14{
+    top: 50vh;
+    left: 75vw;
+}
+#Pt15{
+    top: 75vh;
+    left:25vw;
+}
+#Pt16{
+    top:75vh;
+    left: 50vw;
+}
+#Pt17{
+    top:75vh;
+    left:75vw;
+}
 
 #test{
     cursor: none;
@@ -55,6 +87,7 @@
 #faceOverlay {
     width: 117px;
     height: 117px;
+    z-index: 6;
 }
 
 /* Calibration button styling */
@@ -93,15 +126,6 @@
     overflow: auto;
     visibility: hidden;
     z-index: 3;
-}
-
-.instructions{
-    position: absolute;
-    width:50%;
-    top: 20%;
-    left:25%;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 img {

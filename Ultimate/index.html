@@ -8,7 +8,7 @@
 	<script src="./js/require.js" type="text/javascript" ></script>
     <link rel="stylesheet" href="./css/DisplayCSS.css">
 </head>
-<body onkeyup="choosePic()">
+<body>
 	<div class="Step" id="test" style="z-index: 1;">
 		<div class="centerFrames" id="frame1">
 			<img src="images/spacer.jpg" id="Pic1" class="" alt="some image">
@@ -38,9 +38,9 @@
         <input type="button" class="Calibration" id="Pt17" onclick="CButtons(this.id)"></input>
         <canvas id="plotting_canvas" width="500" height="500" style="z-index: 8"></canvas>
     </div>
-    <!-- <div class="Step" id="Step1" style="z-index: 10" >
-    	<button>wait</button>
-        <button>click</button>
-	</div> -->
+    <div class="Step" id="Step1" style="z-index: 10" >
+    	<button onclick="toggleFunction(this.textContent)">wait</button>
+        <button onclick="toggleFunction(this.textContent)">click</button>
+	</div>
 </body>
 </html>

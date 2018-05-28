@@ -10662,32 +10662,35 @@ var mosseFilterResponses = function() {
 
         callback(gazeData, elapsedTime);
 
-        if (gazeData && showGazeDot) {
+        if (gazeData){
+		    if (showGazeDot) {
 
-            smoothingVals.push(gazeData);
-            var x = 0;
-            var y = 0;
-            var len = smoothingVals.length;
-            for (var d in smoothingVals.data) {
-                x += smoothingVals.get(d).x;
-                y += smoothingVals.get(d).y;
-            }
-            var pred = webgazer.util.bound({'x':x/len, 'y':y/len});
+		        smoothingVals.push(gazeData);
+		        var x = 0;
+		        var y = 0;
+		        var len = smoothingVals.length;
+		        for (var d in smoothingVals.data) {
+		            x += smoothingVals.get(d).x;
+		            y += smoothingVals.get(d).y;
+		        }
+		        var pred = webgazer.util.bound({'x':x/len, 'y':y/len});
 
-            if (store_points_var) {
-              drawCoordinates('blue',pred.x,pred.y); //draws the previous predictions
-              //store the position of the past fifty occuring tracker preditions
-              store_points(pred.x, pred.y, k);
-              k++;
-              if (k == 50) {
-                k = 0;
-              }
-            }
-            gazeDot.style.transform = 'translate3d(' + pred.x + 'px,' + pred.y + 'px,0)';
+		        if (store_points_var) {
+		          drawCoordinates('blue',pred.x,pred.y); //draws the previous predictions
+		          //store the position of the past fifty occuring tracker preditions
+		          store_points(pred.x, pred.y, k);
+		          k++;
+		          if (k == 50) {
+		            k = 0;
+		          }
+		        }
+		        gazeDot.style.transform = 'translate3d(' + pred.x + 'px,' + pred.y + 'px,0)';
 
-            //Check that the eyes are inside of the validation box
-            checkEyesInValidationBox();
-        }
+		        //Check that the eyes are inside of the validation box
+		        
+		    }
+			checkEyesInValidationBox();
+		}
 
         if (!paused) {
             //setTimeout(loop, webgazer.params.dataTimestep);

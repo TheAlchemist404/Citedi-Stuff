@@ -11,24 +11,24 @@ CurrentTimeStamp=[],
 TimeStamp=[],
 Stuff=[[]];
 var test=[
-[0,1],
-[2,3],
-[4,5],
-[6,7],
-[8,1],
-[9,10],
-[11,12],
-[2,13],
-[14,15],
-[16,17],
-[18,15],
-[19,20],
-[21,22],
-[23,10],
-[24,8],
-[25,22],
-[26,27],
-[26,28]
+    [0,1],
+    [2,3],
+    [4,5],
+    [6,7],
+    [8,1],
+    [9,10],
+    [11,12],
+    [2,13],
+    [14,15],
+    [16,17],
+    [18,15],
+    [19,20],
+    [21,22],
+    [23,10],
+    [24,8],
+    [25,22],
+    [26,27],
+    [26,28]
 ];/*add here the test sequence*/
 var myPix = [
 	["images/01.png","apple"],
@@ -62,6 +62,22 @@ var myPix = [
     ["images/29.png","shield3"]
 	];
 
+var myDemoPix = [
+    ["images/demo/01.png","FairyTale"],
+    ["images/demo/02.png","eye"],
+    ["images/demo/03.png","plane"],
+    ["images/demo/04.png","sail"],
+    ["images/demo/05.png","star"],
+    ["images/demo/06.png","ligthing"],
+    ["images/demo/07.png","tent"],
+    ["images/demo/08.png","panda"],
+    ["images/demo/09.png","axe"],
+    ["images/demo/10.png","bell"],
+    ["images/demo/11.png","dress"],
+    ["images/demo/12.png","cone"]
+];
+var count=0
+
 function choosePic() {//it will be secuential on all the tests
 	if (document.getElementById('Step2').style.visibility=="hidden"){
 		document.getElementById('frame1').style.visibility="initial"
@@ -74,24 +90,96 @@ function choosePic() {//it will be secuential on all the tests
 	}
 }
 
+function waitPic(){
+    if (document.getElementById('Step2').style.visibility=="hidden"){
+        document.getElementById('frame1').style.visibility="initial"
+        document.getElementById('frame2').style.visibility="initial"
+        if(!controller){
+            controller = setInterval(function(){
+            if(index==test.length){
+                exportData();
+            } else {
+                setpic(); 
+            }
+            },10000);
+        }
+                
+    }
+}
+
+function DemoChoose(){/*for the clicks*/
+
+    if (document.getElementById('Step2').style.visibility=="hidden"){
+        document.getElementById('frame1').style.visibility="initial"
+        document.getElementById('frame2').style.visibility="initial"
+        if(counter+1>=myDemoPix.length){
+            document.getElementById('Step2').style.visibility="initial"
+            document.getElementById('Step1').style.visibility="initial"
+            document.body.onkeyup=null;
+            counter=0;
+            if(controller!=null){
+                clearInterval(controller);
+            }
+        } else {
+            Pic1=document.getElementById("Pic1");
+            Pic2=document.getElementById("Pic2");
+
+            if(Pic1.style.visibility!='hidden'){
+                Pic1.style.visibility='hidden';
+                Pic2.style.visibility='hidden';
+                Pic1.src = "images/spacer.png";
+                Pic1.alt ='none';
+                Pic2.src = "images/spacer.png";
+                Pic2.alt = 'none';
+                console.log(counter);
+                console.log(myDemoPix[counter][0])
+                var toggle= setTimeout(function() {
+                    Pic1.src = myDemoPix[counter][0];
+                    Pic1.alt = myDemoPix[counter][1];
+                    Pic2.src = myDemoPix[counter+1][0];
+                    Pic2.alt = myDemoPix[counter+1][1];
+                    Pic1.style.visibility='initial';
+                    Pic2.style.visibility='initial';
+                    clearTimeout(toggle);
+                },1000);   
+                counter=counter+2;
+            }
+
+        }
+    }
+}
+
+function DemoWait(){/*for the wait*/
+    if (document.getElementById('Step2').style.visibility=="hidden"){
+        document.getElementById('frame1').style.visibility="initial"
+        document.getElementById('frame2').style.visibility="initial"
+        if(!controller){
+            controller = setInterval(DemoChoose,10000);
+        }
+                
+    }
+}
+
 function setpic(){
+    Pic1=document.getElementById("Pic1");
+    Pic2=document.getElementById("Pic2");
     if(index==0){
     logger=setInterval(logginData,50);
     }
-    if(document.getElementById("Pic1").style.visibility!='hidden'){
-    document.getElementById("Pic1").style.visibility='hidden';
-    document.getElementById("Pic2").style.visibility='hidden';
-    document.getElementById("Pic1").src = "images/spacer.png";
-    document.getElementById("Pic1").alt ='none';
-    document.getElementById("Pic2").src = "images/spacer.png";
-    document.getElementById("Pic2").alt = 'none';
+    if(Pic1.style.visibility!='hidden'){
+    Pic1.style.visibility='hidden';
+    Pic2.style.visibility='hidden';
+    Pic1.src = "images/spacer.png";
+    Pic1.alt ='none';
+    Pic2.src = "images/spacer.png";
+    Pic2.alt = 'none';
     var toggle= setTimeout(function() {
-        document.getElementById("Pic1").src = myPix[test[index][0]][0];
-        document.getElementById("Pic1").alt = myPix[test[index][0]][1];
-        document.getElementById("Pic2").src = myPix[test[index][1]][0];
-        document.getElementById("Pic2").alt = myPix[test[index][1]][1];
-        document.getElementById("Pic1").style.visibility='initial';
-        document.getElementById("Pic2").style.visibility='initial';
+        Pic1.src = myPix[test[index][0]][0];
+        Pic1.alt = myPix[test[index][0]][1];
+        Pic2.src = myPix[test[index][1]][0];
+        Pic2.alt = myPix[test[index][1]][1];
+        Pic1.style.visibility='initial';
+        Pic2.style.visibility='initial';
         Ctime=0;
         index++;
         clearTimeout(toggle);
@@ -101,29 +189,27 @@ function setpic(){
 
 function exportData(){
     //export fixations
-            csvStuff=Stuff
-            clearInterval(logger)
-            var csv = 'x fixations,y fixations,CurrentTimeStamp,TimeStamp'; //add the index or name of the pictures shown
-            csvStuff.forEach(function(row) {
-                csv += row.join(',');
-                csv += "\n";
-            });
-
-            var hiddenElement = document.createElement('a');
-            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-            hiddenElement.target = '_blank';
-            hiddenElement.download = 'myFile.csv';
-            hiddenElement.click();
-            document.getElementById('test').style.cursor="default"
-            if(controller!=null){
-                clearInterval(controller);
-            }else{
-                document.body.onkeyup=null;
-            }
+    csvStuff=Stuff
+    clearInterval(logger)
+    var csv = 'x fixations,y fixations,CurrentTimeStamp,TimeStamp'; //add the index or name of the pictures shown
+    csvStuff.forEach(function(row) {
+        csv += row.join(',');
+        csv += "\n";
+    });
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'Test.csv';
+    hiddenElement.click();
+    document.getElementById('test').style.cursor="default"
+    if(controller!=null){
+        clearInterval(controller);
+    }
+    document.body.onkeyup=null;
 }
 
 function SetUp(){
-	webgazer.setRegression('threadedRidge') /* currently must set regression and tracker */
+	webgazer.setRegression('ridge') /* currently must set regression and tracker */
    		.setTracker('clmtrackr')
    		.begin()
    		.showPredictionPoints(true);/*debugging*/
@@ -211,6 +297,9 @@ function SetVideoOutput(){
 function logginData(){
 	TTime=TTime+1;
 	Ctime=Ctime+1;
+    if(document.getElementById("Pic1").alt=="none" || document.getElementById("Pic2").alt=="none"){
+        Ctime=0
+    }
 	gazerdata=webgazer.getCurrentPrediction();
 	Xprediction.push(gazerdata.x);
 	Yprediction.push(gazerdata.y);
@@ -251,29 +340,25 @@ function CButtons(ButtonClicked) { // click event on the calibration buttons
 	}
 }
 
+var counter
+
 function toggleFunction(text){
-    if(text=="click"){
-        document.body.onkeyup=choosePic;
+    if (document.getElementById("DemoCheck").checked){
+        counter=0;
+        if(text=="click"){
+            document.body.onkeyup=DemoChoose;
+        }else{
+            document.body.onkeyup=DemoWait;
+        }
     }else{
-        document.body.onkeyup=function(){
-            if (document.getElementById('Step2').style.visibility=="hidden"){
-                document.getElementById('frame1').style.visibility="initial"
-                document.getElementById('frame2').style.visibility="initial"
-                if(!controller){
-                    controller = setInterval(function(){
-                    if(index==test.length){
-                        exportData();
-                    } else {
-                        setpic(); 
-                    }
-                    },5000);
-                }
-                
-            }
+        if(text=="click"){
+            document.body.onkeyup=choosePic;
+        }else{
+            document.body.onkeyup=waitPic;
         }
     }
+    
     document.getElementById("Step1").style.visibility="hidden"
-
 }
 
 

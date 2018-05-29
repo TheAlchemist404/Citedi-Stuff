@@ -38,10 +38,12 @@
         <input type="button" class="Calibration" id="Pt17" onclick="CButtons(this.id)"></input>
         <canvas id="plotting_canvas" width="500" height="500" style="z-index: 8"></canvas>
     </div>
-    <div class="Step" id="Step1" style="z-index: 10" >
-    	<button onclick="toggleFunction(this.textContent)">wait</button>
-        <button onclick="toggleFunction(this.textContent)">click</button>
-        <input type="checkbox" id="DemoCheck">Demo</input>
-	</div>
+    <div class="Step" id="Step1" style="z-index: 10" >        
+        <div style="position: absolute; top: 50%; transform: translate(-50%, -50%); width:50%; left:50%;">
+            <center><button onclick="toggleFunction(this.textContent)">wait</button></center>
+            <center><button onclick="toggleFunction(this.textContent)">click</button></center>
+            <center><input type="checkbox" id="DemoCheck">Demo</input></center>
+        </div>
+    </div>
 </body>
 </html>

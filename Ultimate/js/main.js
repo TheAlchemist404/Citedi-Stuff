@@ -107,19 +107,13 @@ function waitPic(){
     }
 }
 
-function DemoChoose(){/*for the clicks*/
+function DemoChoose(){/*for the clicks */
 
     if (document.getElementById('Step2').style.visibility=="hidden"){
         document.getElementById('frame1').style.visibility="initial"
         document.getElementById('frame2').style.visibility="initial"
-        if(counter+1>=myDemoPix.length){
-            document.getElementById('Step2').style.visibility="initial"
-            document.getElementById('Step1').style.visibility="initial"
-            document.body.onkeyup=null;
-            counter=0;
-            if(controller!=null){
-                clearInterval(controller);
-            }
+        if(count+1>=myDemoPix.length-1){
+            ResetAll();
         } else {
             Pic1=document.getElementById("Pic1");
             Pic2=document.getElementById("Pic2");
@@ -131,18 +125,18 @@ function DemoChoose(){/*for the clicks*/
                 Pic1.alt ='none';
                 Pic2.src = "images/spacer.png";
                 Pic2.alt = 'none';
-                console.log(counter);
-                console.log(myDemoPix[counter][0])
+                console.log(count);
+                console.log(myDemoPix[count][0])
                 var toggle= setTimeout(function() {
-                    Pic1.src = myDemoPix[counter][0];
-                    Pic1.alt = myDemoPix[counter][1];
-                    Pic2.src = myDemoPix[counter+1][0];
-                    Pic2.alt = myDemoPix[counter+1][1];
+                    Pic1.src = myDemoPix[count][0];
+                    Pic1.alt = myDemoPix[count][1];
+                    Pic2.src = myDemoPix[count+1][0];
+                    Pic2.alt = myDemoPix[count+1][1];
                     Pic1.style.visibility='initial';
                     Pic2.style.visibility='initial';
                     clearTimeout(toggle);
                 },1000);   
-                counter=counter+2;
+                count=count+2;
             }
 
         }
@@ -208,6 +202,32 @@ function exportData(){
     document.body.onkeyup=null;
 }
 
+function ResetAll(){
+    document.getElementById('Step2').style.visibility="initial"
+    document.getElementById('Step1').style.visibility="initial"
+    document.body.onkeyup=null;
+    count=0;
+    if(controller!=null){
+        clearInterval(controller);
+    }
+    var buttons=document.getElementsByClassName("Calibration")
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].style.background = "red";
+        buttons[i].style.opacity=0.2;
+        buttons[i].disabled=false;
+    }
+    CalibrationPoints=[];
+    PointCalibrate = 0;
+    document.getElementById("DemoCheck").checked= !document.getElementById("DemoCheck").checked;
+    document.getElementById("Pic1").style.visibility='hidden';
+    document.getElementById("Pic2").style.visibility='hidden';
+    document.getElementById("Pic1").src = "images/spacer.png";
+    document.getElementById("Pic1").alt ='none';
+    document.getElementById("Pic2").src = "images/spacer.png";
+    document.getElementById("Pic2").alt = 'none';
+
+}
+
 function SetUp(){
 	webgazer.setRegression('ridge') /* currently must set regression and tracker */
    		.setTracker('clmtrackr')
@@ -223,13 +243,12 @@ function SetUp(){
     }
     setTimeout(checkIfReady,100);
 
-   	document.getElementById('Pt5').style.display="none";
 }
 
- var width = 320;
-    var height = 240;
-    var topDist = '0px';
-    var leftDist = '0px';
+var width = 320;
+var height = 240;
+var topDist = '0px';
+var leftDist = '0px';
 
 function SetVideoOutput(){
     var video = document.getElementById('webgazerVideoFeed');
@@ -315,6 +334,7 @@ function logginData(){
 
 var CalibrationPoints=[];
 var PointCalibrate = 0;
+var TButtons=16
 
 function CButtons(ButtonClicked) { // click event on the calibration buttons
   if (!CalibrationPoints[ButtonClicked]){ // initialises if not done
@@ -332,32 +352,43 @@ function CButtons(ButtonClicked) { // click event on the calibration buttons
     document.getElementById(ButtonClicked).style.opacity=opacity;
   }
 	//Show the middle calibration point after all other points have been clicked.
-	if (PointCalibrate == 16){
-		document.getElementById('Pt5').style.display="initial";
+	if (PointCalibrate == TButtons){
+		document.getElementById("Pt5").style.display="initial";
 	}
-	if (PointCalibrate >= 17){ // last point is calibrated
+	if (PointCalibrate >= TButtons+1){ // last point is calibrated
 		document.getElementById('Step2').style.visibility="hidden";
 	}
 }
 
-var counter
-
 function toggleFunction(text){
+    buttons=document.getElementsByClassName("Calibration")
     if (document.getElementById("DemoCheck").checked){
-        counter=0;
+        count=0;
+        TButtons=4;
+        for(var i = 0; i < buttons.length; i++){
+            buttons[i].style.display = "none";
+        }
+        document.getElementById("Pt4").style.display="initial";
+        document.getElementById("Pt6").style.display="initial";
+        document.getElementById("Pt13").style.display="initial";
+        document.getElementById("Pt14").style.display="initial";
         if(text=="click"){
             document.body.onkeyup=DemoChoose;
         }else{
             document.body.onkeyup=DemoWait;
         }
     }else{
+        TButtons=16;
+        for(var i = 0; i < buttons.length; i++){
+            buttons[i].style.display = "initial";
+        }
         if(text=="click"){
             document.body.onkeyup=choosePic;
         }else{
             document.body.onkeyup=waitPic;
         }
     }
-    
+    document.getElementById("Pt5").style.display="none";
     document.getElementById("Step1").style.visibility="hidden"
 }
 

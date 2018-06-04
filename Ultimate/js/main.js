@@ -79,12 +79,15 @@ var myDemoPix = [
 var count=0
 
 function choosePic() {//it will be secuential on all the tests
+    console.log("key")
 	if (document.getElementById('Step2').style.visibility=="hidden"){
 		document.getElementById('frame1').style.visibility="initial"
 		document.getElementById('frame2').style.visibility="initial"
 		if(index==test.length){
+            console.log("save")
 			exportData();
 		} else {
+            console.log("pic")
 			setpic(); 
 		}
 	}
@@ -97,11 +100,12 @@ function waitPic(){
         if(!controller){
             controller = setInterval(function(){
             if(index==test.length){
+
                 exportData();
             } else {
                 setpic(); 
             }
-            },10000);
+            },5000);
         }
                 
     }
@@ -135,6 +139,7 @@ function DemoChoose(){/*for the clicks */
                     Pic1.style.visibility='initial';
                     Pic2.style.visibility='initial';
                     clearTimeout(toggle);
+                    toggle=null;
                 },1000);   
                 count=count+2;
             }
@@ -148,7 +153,7 @@ function DemoWait(){/*for the wait*/
         document.getElementById('frame1').style.visibility="initial"
         document.getElementById('frame2').style.visibility="initial"
         if(!controller){
-            controller = setInterval(DemoChoose,10000);
+            controller = setInterval(DemoChoose,4000);
         }
                 
     }
@@ -158,26 +163,29 @@ function setpic(){
     Pic1=document.getElementById("Pic1");
     Pic2=document.getElementById("Pic2");
     if(index==0){
-    logger=setInterval(logginData,50);
+        logger=setInterval(logginData,50);
+        console.log("Start log")
     }
     if(Pic1.style.visibility!='hidden'){
-    Pic1.style.visibility='hidden';
-    Pic2.style.visibility='hidden';
-    Pic1.src = "images/spacer.png";
-    Pic1.alt ='none';
-    Pic2.src = "images/spacer.png";
-    Pic2.alt = 'none';
-    var toggle= setTimeout(function() {
-        Pic1.src = myPix[test[index][0]][0];
-        Pic1.alt = myPix[test[index][0]][1];
-        Pic2.src = myPix[test[index][1]][0];
-        Pic2.alt = myPix[test[index][1]][1];
-        Pic1.style.visibility='initial';
-        Pic2.style.visibility='initial';
-        Ctime=0;
-        index++;
-        clearTimeout(toggle);
-    },1000);   
+        console.log("new pic");
+        Pic1.style.visibility='hidden';
+        Pic2.style.visibility='hidden';
+        Pic1.src = "images/spacer.png";
+        Pic1.alt ='none';
+        Pic2.src = "images/spacer.png";
+        Pic2.alt = 'none';
+        var toggle= setTimeout(function() {
+            Pic1.src = myPix[test[index][0]][0];
+            Pic1.alt = myPix[test[index][0]][1];
+            Pic2.src = myPix[test[index][1]][0];
+            Pic2.alt = myPix[test[index][1]][1];
+            Pic1.style.visibility='initial';
+            Pic2.style.visibility='initial';
+            Ctime=0;
+            index++;
+            clearTimeout(toggle);
+            toggle=null;
+        },1000);   
     }
 }
 
@@ -207,8 +215,10 @@ function ResetAll(){
     document.getElementById('Step1').style.visibility="initial"
     document.body.onkeyup=null;
     count=0;
+    toggle=null;
     if(controller!=null){
         clearInterval(controller);
+        controller=null;
     }
     var buttons=document.getElementsByClassName("Calibration")
     for(var i = 0; i < buttons.length; i++){
@@ -219,8 +229,8 @@ function ResetAll(){
     CalibrationPoints=[];
     PointCalibrate = 0;
     document.getElementById("DemoCheck").checked= !document.getElementById("DemoCheck").checked;
-    document.getElementById("Pic1").style.visibility='hidden';
-    document.getElementById("Pic2").style.visibility='hidden';
+    document.getElementById("frame1").style.visibility='hidden';
+    document.getElementById("frame2").style.visibility='hidden';
     document.getElementById("Pic1").src = "images/spacer.png";
     document.getElementById("Pic1").alt ='none';
     document.getElementById("Pic2").src = "images/spacer.png";
@@ -232,7 +242,7 @@ function SetUp(){
 	webgazer.setRegression('ridge') /* currently must set regression and tracker */
    		.setTracker('clmtrackr')
    		.begin()
-   		.showPredictionPoints(true);/*debugging*/
+   		.showPredictionPoints(false);/*debugging*/
 
 	function checkIfReady() {
 	    if (webgazer.isReady()) {

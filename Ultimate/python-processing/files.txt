@@ -1,1 +1,2 @@
-C:\Users\Catedras05\Downloads\
+Delete this text and in the first line and put your main path to the files
+and in the next lines write the file names that you want to process

@@ -1,4 +1,4 @@
-var store_points_var = false;
+var store_points_var = true;
 var xPast50 = new Array(50);
 var yPast50 = new Array(50);
 

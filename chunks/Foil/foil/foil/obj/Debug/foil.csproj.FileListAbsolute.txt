@@ -1,0 +1,9 @@
+C:\Users\Catedras05\Desktop\Foil\foil\foil\bin\Debug\foil.exe.config
+C:\Users\Catedras05\Desktop\Foil\foil\foil\bin\Debug\foil.exe
+C:\Users\Catedras05\Desktop\Foil\foil\foil\bin\Debug\foil.pdb
+C:\Users\Catedras05\Desktop\Foil\foil\foil\obj\Debug\foil.csprojAssemblyReference.cache
+C:\Users\Catedras05\Desktop\Foil\foil\foil\obj\Debug\foil.Properties.Resources.resources
+C:\Users\Catedras05\Desktop\Foil\foil\foil\obj\Debug\foil.csproj.GenerateResource.cache
+C:\Users\Catedras05\Desktop\Foil\foil\foil\obj\Debug\foil.csproj.CoreCompileInputs.cache
+C:\Users\Catedras05\Desktop\Foil\foil\foil\obj\Debug\foil.exe
+C:\Users\Catedras05\Desktop\Foil\foil\foil\obj\Debug\foil.pdb

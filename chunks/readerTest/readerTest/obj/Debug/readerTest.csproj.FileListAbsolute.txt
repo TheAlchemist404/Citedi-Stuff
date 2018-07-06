@@ -1,0 +1,7 @@
+C:\Users\Catedras05\Desktop\readerTest\readerTest\obj\Debug\readerTest.csprojAssemblyReference.cache
+C:\Users\Catedras05\Desktop\readerTest\readerTest\obj\Debug\readerTest.csproj.CoreCompileInputs.cache
+C:\Users\Catedras05\Desktop\readerTest\readerTest\bin\Debug\readerTest.exe.config
+C:\Users\Catedras05\Desktop\readerTest\readerTest\bin\Debug\readerTest.exe
+C:\Users\Catedras05\Desktop\readerTest\readerTest\bin\Debug\readerTest.pdb
+C:\Users\Catedras05\Desktop\readerTest\readerTest\obj\Debug\readerTest.exe
+C:\Users\Catedras05\Desktop\readerTest\readerTest\obj\Debug\readerTest.pdb

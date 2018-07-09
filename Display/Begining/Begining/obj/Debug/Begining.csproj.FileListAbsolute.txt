@@ -1,0 +1,10 @@
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\bin\Debug\Begining.exe.config
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\bin\Debug\Begining.exe
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\bin\Debug\Begining.pdb
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\obj\Debug\Begining.csprojAssemblyReference.cache
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\obj\Debug\Begining.Test.resources
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\obj\Debug\Begining.Properties.Resources.resources
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\obj\Debug\Begining.csproj.GenerateResource.cache
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\obj\Debug\Begining.csproj.CoreCompileInputs.cache
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\obj\Debug\Begining.exe
+C:\Users\Catedras05\Desktop\Display\Begining\Begining\obj\Debug\Begining.pdb

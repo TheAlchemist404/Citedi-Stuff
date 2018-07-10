@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 
 namespace Begining
 {
@@ -28,18 +29,15 @@ namespace Begining
             Dots[7] = Box8;
             Dots[8] = Box9;
             Dots[9] = Box10;
-            foreach (var item in Dots)
-            {
-                item.Height = this.Height / 40;
-                item.Width = item.Height;
-            }
             openFileDialog1.ShowDialog();
+            DoubleBuffered = true;
 
         }
 
         private void Test_Load(object sender, EventArgs e)
         {
             var Stuff = getcoords(openFileDialog1.FileName);
+
             Pdata = Stuff.Item1;
             picsroute = Stuff.Item2;
             var X = new List<int>();
@@ -51,8 +49,15 @@ namespace Begining
                 //Dots.Add(InitializePictureBox());
             }
             SetPoints(X.ToArray(), Y.ToArray());
+            
             button1.Left = (this.Width / 2) - (button1.Width / 2);
             button1.Top = (this.Height / 2) - (button1.Height / 2);
+            foreach (var item in Dots)
+            {
+                item.Height = this.Height / 40;
+                item.Width = item.Height;
+                
+            }
         }
 
         private PictureBox InitializePictureBox()
@@ -126,7 +131,9 @@ namespace Begining
 
                 for (int i = 0; i < TestsRaw.Length; i++)
                 {
-                    if (TestsRaw[i].Contains(",,")) { pics[i] = TestsRaw[i].Substring(0,TestsRaw[i].LastIndexOf(",,")-2); }
+                    if (TestsRaw[i].Contains(",,")) {
+                        pics[i] = TestsRaw[i].Substring(0,TestsRaw[i].LastIndexOf(",,"));
+                    }
                     for (int i2 = 0; i2 < Coords[i].Length; i2++)
                     {
                         Buff = Regex.Split(Coords[i][i2], ",");
@@ -169,6 +176,10 @@ namespace Begining
             timer1.Enabled = true;
             button1.Visible = false;
             button1.Enabled = false;
+            button2.Visible = false;
+            button2.Enabled = false;
+            setBackground(cTest);
+            Cursor.Hide();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -176,6 +187,7 @@ namespace Begining
             if (cPoint < Pdata.GetLength(1) && Pdata[cTest, cPoint, 2] > 0)
             {
                 wipePoints();
+                Dots[cPoint].BackColor = Color.Transparent;
                 Dots[cPoint].Visible = true;
                 timer1.Interval = Pdata[cTest, cPoint, 2]*1000;
                 cPoint++;
@@ -206,20 +218,29 @@ namespace Begining
                     button1.Enabled = true;
                     button1.Visible = true;
                     this.BackgroundImage = null;
+                    button2.Visible = true;
+                    button2.Enabled = true;
+                    Cursor.Show();
                 }
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         public void setBackground(int index)
         {
-            //try
-            //{
+            try
+            {
+                var dir = Image.FromFile((openFileDialog1.FileName.Remove(openFileDialog1.FileName.Length - openFileDialog1.SafeFileName.Length)) + picsroute[index]);
                 this.BackgroundImage = Image.FromFile((openFileDialog1.FileName.Remove(openFileDialog1.FileName.Length - openFileDialog1.SafeFileName.Length))+picsroute[index]);
-            /*}
+            }
             catch (FileNotFoundException)
             {
                 this.BackgroundImage = null;
-            }*/
+            }
             
         }
     }
